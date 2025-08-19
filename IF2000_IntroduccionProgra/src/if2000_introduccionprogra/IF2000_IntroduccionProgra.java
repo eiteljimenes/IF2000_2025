@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package if2000_introduccionprogra;
+import domain.Person;
 
 /**
  *
@@ -22,27 +19,19 @@ public class IF2000_IntroduccionProgra {
     System.out.println("Hello Word ");
     System.out.println (" name: "+name);
     System.out.println(" Age: "+age);
-    
+        /*
+        Tipos de datos Numericos:
+        int,long,short,float,double,numeric,money,decimal
+        Manejo de fechas: Date
+        Cadena de texto: Strng
+        Objetos: object
+        Data structres:
+        Arrays or Vectors: int[] x;
+        int[][] y;
+         */    
            
     
-    /*
-    Tipos de datos Numericos:
-    int,long,short,float,double,numeric,money,decimal
-    
-    Manejo de fechas: Date
-    
-    Cadena de texto: Strng
-    
-    Objetos: object
-    
-    Data structres:
-    
-    Arrays or Vectors: int[] x;
-                       int[][] y;
-    
-    */
-    
- 
+Person P = new Person ("Manuel","Jimenez","C234432","E772812",20);
     
     }
     
