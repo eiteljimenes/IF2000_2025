@@ -35,13 +35,10 @@ public void quiz2_B_piramide(int n){
     
    
 } //endmetodo
- public void ejercicioA(){
-     
+ public void ejercicioA(){  
      
  }
-     
-     
- }   
+ } 
    //  Repositorio_semana2_practica1 ej = new Repositorio_semana2_practica1(); 
     
 

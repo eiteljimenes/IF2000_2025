@@ -23,10 +23,26 @@ public class IF2000_IntroduccionProgra {
   // Person p = new Person ("Manuel","Jimenez","C234432","E772812",20);
  Repositorio_semana2_practica1 ej = new Repositorio_semana2_practica1();
   ej.quiz2_B_piramide(4);
-    
-    }}
+  
+  System.out.println("\n\n");
+  
+  Repertorio_sem2_prac1 cuadr = new Repertorio_sem2_prac1();
+  cuadr.cuadrado(6, 6);
+  
+  System.out.println("\n\n");
+   TriangulosInvertidos obj = new TriangulosInvertidos();
 
-    
+        System.out.println("Triángulo invertido a la izquierda:");
+        obj.trianguloIzquierda(5);
+
+        System.out.println("\nTriángulo invertido a la derecha:");
+        obj.trianguloDerecha(5);
+  
+ } 
+
+}
+
+
 /* String name = "Lionel";
     int age =40;
     
