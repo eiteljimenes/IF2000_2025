@@ -10,6 +10,8 @@
 
 package if2000_introduccionprogra;
  import Logic.*;
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class IF2000_IntroduccionProgra {
     
@@ -30,17 +32,35 @@ public class IF2000_IntroduccionProgra {
   cuadr.cuadrado(6, 6);
   
   System.out.println("\n\n");
-   TriangulosInvertidos obj = new TriangulosInvertidos();
+    Scanner sc = new Scanner(System.in);
+        TriangulosInvertidos obj = new TriangulosInvertidos();
 
+        // Prueba de triángulos invertidos
         System.out.println("Triángulo invertido a la izquierda:");
         obj.trianguloIzquierda(5);
 
         System.out.println("\nTriángulo invertido a la derecha:");
         obj.trianguloDerecha(5);
-  
+
+        // Prueba de ejercicios
+        obj.ejercicio1(sc);
+        obj.ejercicio2(sc);
+        obj.ejercicio3();
+        obj.ejercicio4(sc);
+        obj.ejercicio5(sc);
+        obj.ejercicio6(sc);
+        obj.ejercicio7(sc);
+        obj.ejercicio8(sc);
+        obj.ejercicio9(sc);
+        obj.ejercicio10(sc);
+        obj.ejercicio11(sc);
+        obj.ejercicio12(sc);
+
+        sc.close();
+    }
  } 
 
-}
+
 
 
 /* String name = "Lionel";
