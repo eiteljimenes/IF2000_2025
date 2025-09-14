@@ -1,14 +1,15 @@
 
-package domain;
-public class Person {
-    //Atributes
-    //Atributes global
-   private String name;
-   private String lastname;
-   private String id;
-   private String phone;
-   private int age;
+package Clases;
 
+public class Person {
+    // Attributes
+    private String name;
+    private String lastname;
+    private String id;
+    private String phone;
+    private int age;
+
+    // Constructor completo
     public Person(String name, String lastname, String id, String phone, int age) {
         this.name = name;
         this.lastname = lastname;
@@ -17,9 +18,20 @@ public class Person {
         this.age = age;
     }
 
+    // Constructor simple compatible con Main
+    public Person(String name, String id) {
+        this.name = name;
+        this.id = id;
+        this.lastname = "";
+        this.phone = "";
+        this.age = 0;
+    }
+
+    // Constructor vacío
     public Person() {
     }
 
+    // Getters y Setters
     public String getName() {
         return name;
     }
@@ -63,18 +75,11 @@ public class Person {
     @Override
     public String toString() {
         return "Person{"
-                + "name=" +getName()
-                + ", lastname=" + getLastname() 
+                + "name=" + getName()
+                + ", lastname=" + getLastname()
                 + ", id=" + getId()
                 + ", phone=" + getPhone()
-                + ", age=" + getAge();
+                + ", age=" + getAge()
+                + "}";
     }
-
-    
-    
-    
-   
-   
-   
-   
 }

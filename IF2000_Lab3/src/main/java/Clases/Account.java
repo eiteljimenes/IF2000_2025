@@ -1,9 +1,15 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Clases;
 
-package domain;
-
-
-
-public abstract class account {
+/**
+ *
+ * @author eitel
+ */
+public abstract class Account {
+    
  // Atribute   
 private String accountNumber;
 private double balance;
@@ -11,10 +17,10 @@ private Person client;
 
 
 
-    public account() {
+    public Account() {
     }
 
-    public account(String accountNumber, double balance, Person client) {
+    public Account(String accountNumber, double balance, Person client) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.client = client;
