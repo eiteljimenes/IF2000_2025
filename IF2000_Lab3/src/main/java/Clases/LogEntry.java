@@ -1,76 +1,71 @@
-
 package Clases;
 
-/**
- *
- * @author eitel
- */
-   
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * EventType: types of events we log.
+ * LogEntry: manages a record of banking operations.
+ * Each entry has a unique ID, type of event, timestamp, and details.
  */
 public class LogEntry {
- 
-enum EventType {
-    DEPOSIT, WITHDRAW, TRANSFER
-}
 
-/**
- * LogEntry: single immutable record in the Bitacora.
- */
-class LogEntry {
-    private static int counter = 0;
-    private final int idEvent;
-    private final EventType eventType;
-    private final LocalDateTime timestamp;
-    private final String details;
-
-    public LogEntry(EventType eventType, String details) {
-        this.idEvent = ++counter;
-        this.eventType = eventType;
-        this.timestamp = LocalDateTime.now();
-        this.details = details;
+    // Enum to indicate type of event
+    public enum EventType {
+        DEPOSIT, WITHDRAW, TRANSFER
     }
 
-    public int getIdEvent() { return idEvent; }
-    public EventType getEventType() { return eventType; }
-    public LocalDateTime getTimestamp() { return timestamp; }
-    public String getDetails() { return details; }
+    // List to store all log entries
+    private final List<Entry> entries = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return String.format("LogEntry[id=%d, event=%s, time=%s, details=%s]",
-                idEvent, eventType, timestamp, details);
+    /**
+     * Entry: single record inside the log
+     */
+    public static class Entry {
+        private static int counter = 0;
+        private final int idEvent;       // Unique ID for this entry
+        private final EventType eventType;
+        private final LocalDateTime timestamp;
+        private final String details;
+
+        public Entry(EventType eventType, String details) {
+            this.idEvent = ++counter;
+            this.eventType = eventType;
+            this.timestamp = LocalDateTime.now();
+            this.details = details;
+        }
+
+        @Override
+        public String toString() {
+            return "LogEntry[id=" + idEvent +
+                    ", event=" + eventType +
+                    ", time=" + timestamp +
+                    ", details=" + details + "]";
+        }
     }
-}
 
-/**
- * Bitacora: collects log entries and allows printing / retrieval.
- */
-class Bitacora {
-    private final List<LogEntry> entries = new ArrayList<>();
-
+    /**
+     * Record a new event in the log
+     */
     public void record(EventType eventType, String details) {
-        entries.add(new LogEntry(eventType, details));
+        entries.add(new Entry(eventType, details));
     }
 
-    public List<LogEntry> getEntries() {
+    /**
+     * Return all entries (read-only)
+     */
+    public List<Entry> getEntries() {
         return Collections.unmodifiableList(entries);
     }
 
+    /**
+     * Print all entries to console
+     */
     public void printAll() {
-        System.out.println("=== BITACORA ===");
-        for (LogEntry e : entries) {
+        System.out.println("=== LOG ENTRIES ===");
+        for (Entry e : entries) {
             System.out.println(e);
         }
     }
 }
-}
-  
-    
-

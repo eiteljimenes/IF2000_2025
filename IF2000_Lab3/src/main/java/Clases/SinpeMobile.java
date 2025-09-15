@@ -1,68 +1,69 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 /**
- *
- * @author eitel
- * SinpeMobile: performs a simple transfer between accounts registered in Bank objects.
- * Records operations in Bitacora.
+ * SinpeMobile: performs money transfers between accounts.
+ * Uses LogEntry to record all operations.
  */
-class SinpeMobile {
-    private final Bitacora bitacora;
+public class SinpeMobile {
+    private final LogEntry logEntry; // Reference to the log system
 
-    public SinpeMobile(Bitacora bitacora) {
-        this.bitacora = bitacora;
+    public SinpeMobile(LogEntry logEntry) {
+        this.logEntry = logEntry;
     }
 
     /**
-     * Transfer amount from source to destination across banks.
-     * Returns true if successful, false otherwise.
+     * Transfer money between two accounts in two banks.
+     * @param amount the amount to transfer
+     * @param fromBank the source bank
+     * @param fromAccNumber the source account number
+     * @param toBank the destination bank
+     * @param toAccNumber the destination account number
+     * @return true if transfer successful, false otherwise
      */
-    public boolean transfer(double amount, Bank fromBank, String fromAccNumber, Bank toBank, String toAccNumber) {
-        if (amount <= 0) throw new IllegalArgumentException("Amount must be positive.");
+    public boolean transfer(double amount, Bank fromBank, String fromAccNumber,
+                            Bank toBank, String toAccNumber) {
+        if (amount <= 0) {
+            System.err.println("Amount must be positive.");
+            return false;
+        }
 
-        var fromOpt = fromBank.getAccount(fromAccNumber);
-        var toOpt = toBank.getAccount(toAccNumber);
+        // Get accounts from banks
+        Account from = fromBank.getAccount(fromAccNumber).orElse(null);
+        Account to = toBank.getAccount(toAccNumber).orElse(null);
 
-        if (fromOpt.isEmpty()) {
+        if (from == null) {
             System.err.println("Source account not found in bank: " + fromBank.getName());
             return false;
         }
-        if (toOpt.isEmpty()) {
+        if (to == null) {
             System.err.println("Destination account not found in bank: " + toBank.getName());
             return false;
         }
 
-        Account from = fromOpt.get();
-        Account to = toOpt.get();
-
-        synchronized (this) { // basic concurrency-safe region for demo
+        synchronized (this) { // Thread-safe basic simulation
             if (from.getBalance() < amount) {
                 System.err.println("Insufficient funds in source account.");
                 return false;
             }
 
-            // perform atomic update using getters/setters (because Account abstract methods
-            // in your provided code don't accept amount parameters)
+            // Perform the transfer
             from.setBalance(from.getBalance() - amount);
             to.setBalance(to.getBalance() + amount);
 
-            // Log both operations and the transfer event
-            bitacora.record(EventType.WITHDRAW, String.format("Withdraw %.2f from %s. New balance: %.2f",
-                    amount, from.getAccountNumber(), from.getBalance()));
+            // Record events
+            logEntry.record(LogEntry.EventType.WITHDRAW,
+                    "Withdraw " + amount + " from " + from.getAccountNumber() +
+                            ". New balance: " + from.getBalance());
 
-            bitacora.record(EventType.DEPOSIT, String.format("Deposit %.2f to %s. New balance: %.2f",
-                    amount, to.getAccountNumber(), to.getBalance()));
+            logEntry.record(LogEntry.EventType.DEPOSIT,
+                    "Deposit " + amount + " to " + to.getAccountNumber() +
+                            ". New balance: " + to.getBalance());
 
-            bitacora.record(EventType.TRANSFER, String.format("Transfer %.2f from %s to %s",
-                    amount, from.getAccountNumber(), to.getAccountNumber()));
+            logEntry.record(LogEntry.EventType.TRANSFER,
+                    "Transfer " + amount + " from " + from.getAccountNumber() +
+                            " to " + to.getAccountNumber());
 
             return true;
         }
     }
 }
-
-

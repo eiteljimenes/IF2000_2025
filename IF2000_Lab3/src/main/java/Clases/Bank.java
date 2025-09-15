@@ -1,18 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Clases;
-
-//@author eitel
 package Clases;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-
-class Bank {
+/**
+ * Bank: representa un banco que contiene cuentas registradas.
+ * Permite agregar cuentas y buscarlas por número de cuenta.
+ */
+public class Bank {
     private final String name;
     private final Map<String, Account> accounts = new HashMap<>();
 
@@ -20,18 +16,24 @@ class Bank {
         this.name = name;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     /**
-     * Add an account to this bank registry.
-     * Note: user's Account class does not have a bankName field, so we do not attempt
-     * to validate ownership here. We simply register the account under its number.
+     * Agrega una cuenta al banco.
+     * @param account cuenta a agregar
      */
     public void addAccount(Account account) {
         if (account == null) throw new IllegalArgumentException("Account cannot be null.");
         accounts.put(account.getAccountNumber(), account);
     }
 
+    /**
+     * Obtiene una cuenta por su número.
+     * @param accountNumber número de la cuenta
+     * @return Optional que puede contener la cuenta o estar vacío
+     */
     public Optional<Account> getAccount(String accountNumber) {
         return Optional.ofNullable(accounts.get(accountNumber));
     }
@@ -41,5 +43,3 @@ class Bank {
         return "Bank[" + name + "]";
     }
 }
-  
-
